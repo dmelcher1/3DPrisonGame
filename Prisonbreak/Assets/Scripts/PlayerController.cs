@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour {
     private Animator animator;
     [SerializeField]
     private float dampDirectionTime = .25f;
-    [SerializeField]
-    private Camera playerCam;
+    //[SerializeField]
+    public Camera playerCam;
     [SerializeField]
     private float directionSpeed = 3.0f;
 
@@ -25,11 +25,14 @@ public class PlayerController : MonoBehaviour {
 
     public Vector2 controlInput;
 
+    //Hash ID
+    private int n_LocomotionID = 0;
+
 
 	// Use this for initialization
 	void Start ()
     {
-        playerCam = GetComponent<Camera>();
+        
         animator = GetComponent<Animator>();
 
         //if (animator.layerCount >= 2) ;
@@ -54,13 +57,26 @@ public class PlayerController : MonoBehaviour {
         transform.Translate(0, 0, vertical);
         transform.Rotate(0, horizontal, 0);
 
-        speed = new Vector2(horizontal, vertical).magnitude; //for animations (.sqrMagnitude is faster)
+        ControlToWorld(this.transform, playerCam.transform, ref direction, ref speed);
+
+        //speed = new Vector2(horizontal, vertical).magnitude; //for animations (.sqrMagnitude is faster)
 
         //animator.SetFloat("Speed", speed);
-        //animator.SetFloat("Direction", horizontal, dampDirectionTime, Time.deltaTime);
+        //animator.SetFloat("Direction", direction, dampDirectionTime, Time.deltaTime);
 
-        ControlToWorld(this.transform, playerCam.transform, ref direction, ref speed);
+        
 	}
+
+    //private void FixedUpdate()
+    //{
+    //    if(IsInLocomotion() && ((direction >= 0 && horizontal >= 0) || (direction < 0 && horizontal < 0)))
+    //    {
+    //        Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotationDegreePerSecond * (horizontal < 0.0f ? -1f : 1f), 0.0f), Mathf.Abs)
+    //        Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
+    //        this.transform.rotation = this.transform.rotation * deltatRotation;
+
+    //    }
+    //}
 
     public void ControlToWorld(Transform playerTrans, Transform camera, ref float directionOut, ref float speedOut)
     {
@@ -75,10 +91,14 @@ public class PlayerController : MonoBehaviour {
         Quaternion referentialShift = Quaternion.FromToRotation(Vector3.forward, CameraDirection);
 
         Vector3 moveDirection = referentialShift * stickDirection;
-        Vector3 axisSign = Vector3.Cross(moveDirection, playerTransDirection);
+        Vector3 axisSign = Vector3.Cross(moveDirection, playerTransDirection); 
+        //Determines whether or not the vector between moveDirection and playerTransform's Direction is positive or negative
+        //so the camera knows where to turn
 
-        //Debug.DrawRay(new Vector3(playerTrans.position.x, playerTrans.position.y + 2.0f, playerTrans.position.z), moveDirection, Color.green);
-        //Debug.DrawRay(new Vector3(playerTrans.position.x, playerTrans.position.y + 2.0f, playerTrans.position.z), playerTransDirection, Color.red);
+        Debug.DrawRay(new Vector3(playerTrans.position.x, playerTrans.position.y + 2.0f, playerTrans.position.z), moveDirection, Color.green);
+        //Cross-prodcut: If yellow is up (positive) turn left, if down (negative) turn right
+        Debug.DrawRay(new Vector3(playerTrans.position.x, playerTrans.position.y + 2.0f, playerTrans.position.z), axisSign, Color.yellow);
+        Debug.DrawRay(new Vector3(playerTrans.position.x, playerTrans.position.y + 2.0f, playerTrans.position.z), playerTransDirection, Color.red);
         Debug.DrawRay(new Vector3(playerTrans.position.x, playerTrans.position.y + 2.0f, playerTrans.position.z), stickDirection, Color.blue);
 
         float angleplayerTransToMove = Vector3.Angle(playerTransDirection, moveDirection) * (axisSign.y >= 0 ? -1.0f : 1.0f);
@@ -87,4 +107,9 @@ public class PlayerController : MonoBehaviour {
 
         directionOut = angleplayerTransToMove * directionSpeed;
     }
+
+    //public bool IsInLocomotion()
+    //{
+    //    return stateInfo.nameHash == n_LocomotionID;
+    //}
 }
