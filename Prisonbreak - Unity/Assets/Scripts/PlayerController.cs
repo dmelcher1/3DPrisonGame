@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour {
     public Vector2 controlInput;
 
     //Hash ID
-    private int n_LocomotionID = 0;
+    private int Run_and_SprintID = 0;
 
 
 	// Use this for initialization
@@ -64,9 +64,9 @@ public class PlayerController : MonoBehaviour {
 
             ControlToWorld(this.transform, playerCam.transform, ref direction, ref speed);
 
-            //speed = new Vector2(horizontal, vertical).magnitude; //for animations (.sqrMagnitude is faster)
+            speed = new Vector2(horizontal, vertical).magnitude; //for animations (.sqrMagnitude is faster)
 
-            //animator.SetFloat("Speed", speed);
+            animator.SetFloat("Speed", speed);
             //animator.SetFloat("Direction", direction, dampDirectionTime, Time.deltaTime);
         }
     }
@@ -115,6 +115,6 @@ public class PlayerController : MonoBehaviour {
 
     public bool IsInLocomotion()
     {
-        return stateInfo.fullPathHash == n_LocomotionID;
+        return stateInfo.fullPathHash == Run_and_SprintID;
     }
 }
