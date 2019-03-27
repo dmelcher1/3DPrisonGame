@@ -37,11 +37,11 @@ public class PlayerController : MonoBehaviour {
         
         animator = GetComponent<Animator>();
 
-        //if (animator.layerCount >= 2) ;
-        //{
-        //    animator.SetLayerWeight(1, 1);
-        //}
-	}
+        if (animator.layerCount >= 2) ;
+        {
+            animator.SetLayerWeight(1, 1);
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()
