@@ -49,6 +49,8 @@ public class PlayerCamControl : MonoBehaviour {
         Debug.DrawRay(follow.position, -1.0f * follow.forward * offsetX, Color.blue);
         Debug.DrawLine(follow.position, targetPos, Color.green);
 
+        //Detects camera collision w/wall and compensates instead of clipping
+        DodgeObjects(playerOffset, ref targetPos);
         //Updates cam pos to where we want it
         smoothPosition(this.transform.position, targetPos);
         //transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * camSmoothing);
@@ -60,5 +62,17 @@ public class PlayerCamControl : MonoBehaviour {
     private void smoothPosition(Vector3 start, Vector3 destination)
     {
         this.transform.position = Vector3.SmoothDamp(start, destination, ref camSpeedSmoothing, dampTime);
+    }
+
+    private void DodgeObjects(Vector3 fromCollision, ref Vector3 toPlayer)
+    {
+        Debug.DrawLine(fromCollision, toPlayer, Color.cyan);
+        //Camera hits object compensation
+        RaycastHit objDetect = new RaycastHit();
+        if(Physics.Linecast(fromCollision, toPlayer, out objDetect))
+        {
+            Debug.DrawRay(objDetect.point, Vector3.left, Color.red);
+            toPlayer = new Vector3(objDetect.point.x, toPlayer.y, objDetect.point.z);
+        }
     }
 }

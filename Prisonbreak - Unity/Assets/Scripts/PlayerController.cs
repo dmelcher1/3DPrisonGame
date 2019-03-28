@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     private float vertical = 0.0f;
 
     private float playerRot = 80.0f;
-    private float playerRun = 5.0f;
+    private float playerRun = 4.0f;
     private float controlDeadZone = 0.5f; //NEEDS ADJUSTING TO ALLOW PIVOTING WITHOUT MOVING
     private AnimatorStateInfo stateInfo;
 
@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour {
             ControlToWorld(this.transform, playerCam.transform, ref direction, ref speed);
 
             speed = new Vector2(horizontal, vertical).magnitude; //for animations (.sqrMagnitude is faster)
+
+            Debug.Log(speed);
 
             animator.SetFloat("Speed", speed);
             //animator.SetFloat("Direction", direction, dampDirectionTime, Time.deltaTime);

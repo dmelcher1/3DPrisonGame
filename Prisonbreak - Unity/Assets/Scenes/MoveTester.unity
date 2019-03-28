@@ -592,44 +592,39 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4618964773346144, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
+    - target: {fileID: 4381438776633134, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4618964773346144, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
+    - target: {fileID: 4381438776633134, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0.728
       objectReference: {fileID: 0}
-    - target: {fileID: 4618964773346144, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
+    - target: {fileID: 4381438776633134, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4618964773346144, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
+    - target: {fileID: 4381438776633134, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4618964773346144, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
+    - target: {fileID: 4381438776633134, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4618964773346144, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
+    - target: {fileID: 4381438776633134, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4618964773346144, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
+    - target: {fileID: 4381438776633134, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4618964773346144, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
+    - target: {fileID: 4381438776633134, guid: 36d6622bb9eaf4344841d4ccc1c45c27, type: 2}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114318555218870644, guid: 36d6622bb9eaf4344841d4ccc1c45c27,
-        type: 2}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1636905179}
-    - target: {fileID: 114318555218870644, guid: 36d6622bb9eaf4344841d4ccc1c45c27,
+    - target: {fileID: 114344574849146732, guid: 36d6622bb9eaf4344841d4ccc1c45c27,
         type: 2}
       propertyPath: playerCam
       value: 
@@ -1053,7 +1048,7 @@ GameObject:
   - component: {fileID: 484277910}
   - component: {fileID: 484277909}
   - component: {fileID: 484277913}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1257,7 +1252,7 @@ GameObject:
   - component: {fileID: 522981105}
   - component: {fileID: 522981104}
   - component: {fileID: 522981108}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1403,7 +1398,7 @@ GameObject:
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   - component: {fileID: 534669906}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Main Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1701,7 +1696,7 @@ GameObject:
   - component: {fileID: 1086557530}
   - component: {fileID: 1086557529}
   - component: {fileID: 1086557533}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1996,7 +1991,7 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!4 &1427543321 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4035983162556002, guid: 36d6622bb9eaf4344841d4ccc1c45c27,
+  m_CorrespondingSourceObject: {fileID: 4903359195854064, guid: 36d6622bb9eaf4344841d4ccc1c45c27,
     type: 2}
   m_PrefabInternal: {fileID: 299738771}
 --- !u!1 &1563576605
@@ -2011,7 +2006,7 @@ GameObject:
   - component: {fileID: 1563576607}
   - component: {fileID: 1563576606}
   - component: {fileID: 1563576610}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2102,11 +2097,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &1636905179 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95759342463250032, guid: 36d6622bb9eaf4344841d4ccc1c45c27,
-    type: 2}
-  m_PrefabInternal: {fileID: 299738771}
 --- !u!1 &1808023813
 GameObject:
   m_ObjectHideFlags: 0
