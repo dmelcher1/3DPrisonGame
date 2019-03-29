@@ -19,11 +19,14 @@ public class PlayerController : MonoBehaviour {
     private float direction = 0.0f;
     private float horizontal = 0.0f;
     private float vertical = 0.0f;
+    public bool insideDoorArea = false;
 
     private float playerRot = 80.0f;
     private float playerRun = 4.0f;
     private float controlDeadZone = 0.5f; //NEEDS ADJUSTING TO ALLOW PIVOTING WITHOUT MOVING
     private AnimatorStateInfo stateInfo;
+    public GameObject mainCamera;
+    PlayerCamControl playerCamControl;
 
     public Vector2 controlInput;
 
@@ -37,6 +40,8 @@ public class PlayerController : MonoBehaviour {
         
         animator = GetComponent<Animator>();
 
+        playerCamControl = mainCamera.GetComponent<PlayerCamControl>();
+
         //if (animator.layerCount >= 2)
         //{
         //    animator.SetLayerWeight(1, 1);
@@ -46,7 +51,20 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if(animator)
+        if (insideDoorArea == true)
+        {
+            playerCamControl.offsetX = 1.0f;
+            playerCamControl.offsetY = -0.5f;
+
+            //x = 3, y = 0
+        }
+        else
+        {
+            playerCamControl.offsetX = 5.0f;
+            playerCamControl.offsetY = 2.0f;
+        }
+
+        if (animator)
         {
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             controlInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -82,6 +100,22 @@ public class PlayerController : MonoBehaviour {
             Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
             this.transform.rotation = this.transform.rotation * deltaRotation;
 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Doorway"))
+        {
+            insideDoorArea = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Doorway"))
+        {
+            insideDoorArea = false;
         }
     }
 

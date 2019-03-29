@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class PlayerCamControl : MonoBehaviour {
 
-    [SerializeField]
-    private float offsetX;
-    [SerializeField]
-    private float offsetY;
+    
+    public float offsetX;
+    public float offsetY;
     [SerializeField]
     private float camSmoothing;
     [SerializeField]
     private Transform follow;
     [SerializeField]
     private Vector3 addOffset = new Vector3(0.0f, 1.5f, 0.0f);
+
+    public GameObject playerPrisoner;
+    //public bool insideDoorArea = false;
 
     private Vector3 camLook;
     private Vector3 targetPos;
@@ -30,9 +32,18 @@ public class PlayerCamControl : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.gameObject.tag == "Doorway")
+    //    {
+    //        Physics.IgnoreCollision(collision.collider, this.collider);
+    //    }
+    //}
 
     void LateUpdate()
     {
@@ -56,7 +67,7 @@ public class PlayerCamControl : MonoBehaviour {
         //transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * camSmoothing);
         //targetPos = playerOffset + follow.up * offsetY - camLook * offsetX;
 
-        transform.LookAt(follow);
+        transform.LookAt(follow.position + new Vector3(0, 0.5f, 0));
     }
 
     private void smoothPosition(Vector3 start, Vector3 destination)
