@@ -13,17 +13,28 @@ public class PlayerCamControl : MonoBehaviour {
     private Transform follow;
     [SerializeField]
     private Vector3 addOffset = new Vector3(0.0f, 1.5f, 0.0f);
+    //[SerializeField]
+    //private float widescreen = 0.2f;
+    //[SerializeField]
+    //private float targetingTime = 0.5f;
 
     public GameObject playerPrisoner;
     //public bool insideDoorArea = false;
 
     private Vector3 camLook;
     private Vector3 targetPos;
+    private CameraPhase camPhase = CameraPhase.Behind;
 
     //smoothing and damping
     private Vector3 camSpeedSmoothing = Vector3.zero;
     [SerializeField]
     private float dampTime = 0.1f;
+
+    public enum CameraPhase
+    {
+        Behind,
+        Target
+    }
 
 	// Use this for initialization
 	void Start ()
@@ -49,16 +60,37 @@ public class PlayerCamControl : MonoBehaviour {
     {
         Vector3 playerOffset = follow.position + addOffset;
 
-        camLook = playerOffset - this.transform.position;
-        camLook.y = 0;
-        camLook.Normalize(); //Provides direction for our camera
-        Debug.DrawRay(this.transform.position, camLook, Color.green);
+        //Behind or Target Camera state
+        if (Input.GetAxis("ResetCam") > 0.01f)
+        {
+            camPhase = CameraPhase.Target;
+        }
+        else
+        {
+            camPhase = CameraPhase.Behind;
+        }
 
-        //New set cam position
+
+        switch (camPhase)
+        {
+            case CameraPhase.Behind:
+                camLook = playerOffset - this.transform.position;
+                camLook.y = 0;
+                camLook.Normalize(); //Provides direction for our camera
+                Debug.DrawRay(this.transform.position, camLook, Color.green);
+
+                //New set cam position
+                targetPos = playerOffset + follow.up * offsetY - camLook * offsetX;
+                Debug.DrawRay(follow.position, Vector3.up * offsetY, Color.red);
+                Debug.DrawRay(follow.position, -1.0f * follow.forward * offsetX, Color.blue);
+                Debug.DrawLine(follow.position, targetPos, Color.green);
+                break;
+
+            case CameraPhase.Target:
+                camLook = follow.forward;
+                break;
+        }
         targetPos = playerOffset + follow.up * offsetY - camLook * offsetX;
-        Debug.DrawRay(follow.position, Vector3.up * offsetY, Color.red);
-        Debug.DrawRay(follow.position, -1.0f * follow.forward * offsetX, Color.blue);
-        Debug.DrawLine(follow.position, targetPos, Color.green);
 
         //Detects camera collision w/wall and compensates instead of clipping
         DodgeObjects(playerOffset, ref targetPos);
