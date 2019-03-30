@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCamControl : MonoBehaviour {
 
-    
+
     public float offsetX;
     public float offsetY;
     [SerializeField]
@@ -36,17 +36,17 @@ public class PlayerCamControl : MonoBehaviour {
         Target
     }
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
-        follow = GameObject.FindWithTag("Player").transform;	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+        follow = GameObject.FindWithTag("Player").transform;
+    }
+
+    // Update is called once per frame
+    //void Update()
+    //{
+
+    //}
 
     //private void OnCollisionEnter(Collision collision)
     //{
@@ -112,7 +112,7 @@ public class PlayerCamControl : MonoBehaviour {
         Debug.DrawLine(fromCollision, toPlayer, Color.cyan);
         //Camera hits object compensation
         RaycastHit objDetect = new RaycastHit();
-        if(Physics.Linecast(fromCollision, toPlayer, out objDetect))
+        if (Physics.Linecast(fromCollision, toPlayer, out objDetect))
         {
             Debug.DrawRay(objDetect.point, Vector3.left, Color.red);
             toPlayer = new Vector3(objDetect.point.x, toPlayer.y, objDetect.point.z);

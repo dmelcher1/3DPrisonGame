@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Animator animator;
     [SerializeField]
-    private float dampDirectionTime = .25f;
+    //private float dampDirectionTime = .25f;
     //[SerializeField]
     public Camera playerCam;
     [SerializeField]
@@ -17,16 +17,19 @@ public class PlayerController : MonoBehaviour {
 
     private float speed = 0.0f;
     private float direction = 0.0f;
-    private float horizontal = 0.0f;
-    private float vertical = 0.0f;
+    public float horizontal = 0.0f;
+    public float vertical = 0.0f;
     public bool insideDoorArea = false;
+    public bool airborne = false;
 
     private float playerRot = 80.0f;
     private float playerRun = 4.0f;
+    public float playerJump;
     private float controlDeadZone = 0.5f; //NEEDS ADJUSTING TO ALLOW PIVOTING WITHOUT MOVING
     private AnimatorStateInfo stateInfo;
     public GameObject mainCamera;
     PlayerCamControl playerCamControl;
+    Rigidbody rb;
 
     public Vector2 controlInput;
 
@@ -34,10 +37,11 @@ public class PlayerController : MonoBehaviour {
     private int Run_and_SprintID = 0;
 
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+
         animator = GetComponent<Animator>();
 
         playerCamControl = mainCamera.GetComponent<PlayerCamControl>();
@@ -47,9 +51,9 @@ public class PlayerController : MonoBehaviour {
         //    animator.SetLayerWeight(1, 1);
         //}
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         if (insideDoorArea == true)
         {
@@ -77,6 +81,13 @@ public class PlayerController : MonoBehaviour {
             horizontal = controlInput.x * playerRot * Time.deltaTime;
             vertical = controlInput.y * playerRun * Time.deltaTime;
 
+            if (airborne == false && Input.GetButton("Jump"))
+            {
+                //Debug.Log("Jump");
+                rb.AddForce(Vector3.up * playerJump);
+                airborne = true;
+            }
+
             transform.Translate(0, 0, vertical);
             transform.Rotate(0, horizontal, 0);
 
@@ -84,7 +95,7 @@ public class PlayerController : MonoBehaviour {
 
             speed = new Vector2(horizontal, vertical).magnitude; //for animations (.sqrMagnitude is faster)
 
-            Debug.Log(speed);
+            //Debug.Log(speed);
 
             animator.SetFloat("Speed", speed);
             //animator.SetFloat("Direction", direction, dampDirectionTime, Time.deltaTime);
@@ -99,7 +110,14 @@ public class PlayerController : MonoBehaviour {
             Vector3 rotationAmount = Vector3.Lerp(Vector3.zero, new Vector3(0f, rotDeg * (horizontal < 0.0f ? -1f : 1f), 0.0f), Mathf.Abs(horizontal));
             Quaternion deltaRotation = Quaternion.Euler(rotationAmount * Time.deltaTime);
             this.transform.rotation = this.transform.rotation * deltaRotation;
+        }
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            airborne = false;
         }
     }
 
@@ -132,7 +150,7 @@ public class PlayerController : MonoBehaviour {
         Quaternion referentialShift = Quaternion.FromToRotation(Vector3.forward, CameraDirection);
 
         Vector3 moveDirection = referentialShift * stickDirection;
-        Vector3 axisSign = Vector3.Cross(moveDirection, playerTransDirection); 
+        Vector3 axisSign = Vector3.Cross(moveDirection, playerTransDirection);
         //Determines whether or not the vector between moveDirection and playerTransform's Direction is positive or negative
         //so the camera knows where to turn
 
