@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject mainCamera;
     PlayerCamControl playerCamControl;
     Rigidbody rb;
+    public int keysHeld = 0;
 
     public Vector2 controlInput;
 
@@ -126,6 +127,11 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.CompareTag("Doorway"))
         {
             insideDoorArea = true;
+        }
+        if(other.gameObject.CompareTag("Key"))
+        {
+            keysHeld += 1;
+            Destroy(other.gameObject);
         }
     }
 

@@ -1,0 +1,136 @@
+fileFormatVersion: 2
+guid: 0fbb08908ed2e9546881825f04b4c459
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Prisoner_Front_View
+    100002: Prisoner_Head
+    100004: //RootNode
+    100006: Prisoner_Side_View
+    100008: Prisoner_Torso1
+    100010: Prisoner_Torso_Copy
+    100012: Prisoner_Torso_OG
+    100014: Prisoner_Torso_OG2
+    100016: Prisoner_Torso_OG6
+    100018: pSphere1
+    100020: pSphere2
+    100022: transform10
+    100024: transform4
+    100026: transform6
+    100028: transform7
+    400000: Prisoner_Front_View
+    400002: Prisoner_Head
+    400004: //RootNode
+    400006: Prisoner_Side_View
+    400008: Prisoner_Torso1
+    400010: Prisoner_Torso_Copy
+    400012: Prisoner_Torso_OG
+    400014: Prisoner_Torso_OG2
+    400016: Prisoner_Torso_OG6
+    400018: pSphere1
+    400020: pSphere2
+    400022: transform10
+    400024: transform4
+    400026: transform6
+    400028: transform7
+    2100000: Prisoner_Turnaround_Front
+    2100002: Prisoner_Turnaround_Side
+    2100004: lambert1
+    2300000: Prisoner_Front_View
+    2300002: Prisoner_Side_View
+    2300004: Prisoner_Torso_OG6
+    2300006: pSphere1
+    2300008: pSphere2
+    3300000: Prisoner_Front_View
+    3300002: Prisoner_Side_View
+    3300004: Prisoner_Torso_OG6
+    3300006: pSphere1
+    3300008: pSphere2
+    4300000: Prisoner_Front_View
+    4300002: Prisoner_Side_View
+    4300004: Prisoner_Torso_OG6
+    4300006: pSphere1
+    4300008: pSphere2
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
