@@ -51,7 +51,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4481222300794462}
   m_Layer: 0
-  m_Name: prison_box-1x1
+  m_Name: Box - 1x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

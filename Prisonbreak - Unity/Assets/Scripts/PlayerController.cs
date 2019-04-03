@@ -14,7 +14,11 @@ public class PlayerController : MonoBehaviour {
     private float directionSpeed = 3.0f;
     [SerializeField]
     private float rotDeg = 120f;
+    [SerializeField]
+    private float electricTimer = 0.0f;
 
+    public int health;
+    public Transform playerStart;
     private float speed = 0.0f;
     private float direction = 0.0f;
     public float horizontal = 0.0f;
@@ -22,6 +26,8 @@ public class PlayerController : MonoBehaviour {
     public bool insideDoorArea = false;
     public bool airborne = false;
 
+    public float fadeDelay = 6.0f;
+    public bool dead = false;
     private float playerRot = 80.0f;
     private float playerRun = 4.0f;
     public float playerJump;
@@ -41,6 +47,11 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        this.transform.position = playerStart.position;
+        this.transform.rotation = playerStart.rotation;
+
+        health = 3;
+
         rb = GetComponent<Rigidbody>();
 
         animator = GetComponent<Animator>();
@@ -101,6 +112,17 @@ public class PlayerController : MonoBehaviour {
             animator.SetFloat("Speed", speed);
             //animator.SetFloat("Direction", direction, dampDirectionTime, Time.deltaTime);
         }
+
+        if(health <= 0)
+        {
+            dead = true;
+            fadeDelay -= 0.1f;
+        }
+            //   this.transform.position = playerStart.position;
+            //   this.transform.rotation = playerStart.rotation;
+            //   health = 3;
+
+            electricTimer -= 0.1f;
     }
 
     private void FixedUpdate()
@@ -119,6 +141,11 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.tag == "Ground")
         {
             airborne = false;
+        }
+        if (collision.gameObject.tag == "ElectricFence" && electricTimer <= 0.0f)
+        {
+            health -= 1;
+            electricTimer = 20.0f;
         }
     }
 
