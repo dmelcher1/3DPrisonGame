@@ -9,6 +9,7 @@ TagManager:
   - Locked
   - Unlocked
   - Key
+  - ElectricFence
   layers:
   - Default
   - TransparentFX
