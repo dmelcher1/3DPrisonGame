@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour {
                 rb.AddForce(Vector3.up * playerJump);
                 airborne = true;
             }
-
+            
             transform.Translate(0, 0, vertical);
             transform.Rotate(0, horizontal, 0);
 
