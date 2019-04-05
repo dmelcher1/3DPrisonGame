@@ -23,7 +23,7 @@ public class PlayerCamControl : MonoBehaviour {
 
     private Vector3 camLook;
     private Vector3 targetPos;
-    private CameraPhase camPhase = CameraPhase.Behind;
+    private CameraPhase camPhase = CameraPhase.Target;
 
     //smoothing and damping
     private Vector3 camSpeedSmoothing = Vector3.zero;
@@ -32,7 +32,7 @@ public class PlayerCamControl : MonoBehaviour {
 
     public enum CameraPhase
     {
-        Behind,
+        Around,
         Target
     }
 
@@ -61,19 +61,28 @@ public class PlayerCamControl : MonoBehaviour {
         Vector3 playerOffset = follow.position + addOffset;
 
         //Behind or Target Camera state
+        //if (Input.GetAxis("ResetCam") > 0.01f)
+        //{
+        //    camPhase = CameraPhase.Target;
+        //}
+        //else
+        //{
+        //    camPhase = CameraPhase.Behind;
+        //}
+
         if (Input.GetAxis("ResetCam") > 0.01f)
         {
-            camPhase = CameraPhase.Target;
+            camPhase = CameraPhase.Around;
         }
         else
         {
-            camPhase = CameraPhase.Behind;
+            camPhase = CameraPhase.Target;
         }
 
 
         switch (camPhase)
         {
-            case CameraPhase.Behind:
+            case CameraPhase.Around:
                 camLook = playerOffset - this.transform.position;
                 camLook.y = 0;
                 camLook.Normalize(); //Provides direction for our camera
