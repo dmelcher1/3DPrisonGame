@@ -19,7 +19,7 @@ public class LevelShift : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-		if(playerController.dead == true)
+		if(playerController.dead == true && playerController.fadeDelay <= 0.0f)
         {
             FadeOnDeath();
         }
@@ -35,7 +35,9 @@ public class LevelShift : MonoBehaviour {
         player.transform.position = playerController.playerStart.position;
         player.transform.rotation = playerController.playerStart.rotation;
         playerController.health = 3;
+        playerController.spottedTimer = 10.0f;
         playerController.dead = false;
+        playerController.caught = false;
         playerController.fadeDelay = 6.0f;
         animator.SetBool("FadeOut", false);
     }

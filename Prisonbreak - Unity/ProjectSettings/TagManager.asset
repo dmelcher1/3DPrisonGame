@@ -10,6 +10,7 @@ TagManager:
   - Unlocked
   - Key
   - ElectricFence
+  - PlayerDetector
   layers:
   - Default
   - TransparentFX

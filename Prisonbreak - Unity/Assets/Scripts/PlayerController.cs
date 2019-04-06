@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour {
     private float direction = 0.0f;
     public float horizontal = 0.0f;
     public float vertical = 0.0f;
+    public float spottedTimer = 10.0f;
+    public float coolDownTimer;
+    public bool spotted = false;
+    public bool caught = false;
     public bool insideDoorArea = false;
     public bool airborne = false;
 
@@ -101,7 +105,18 @@ public class PlayerController : MonoBehaviour {
             }
             
             transform.Translate(0, 0, vertical);
-            transform.Rotate(0, horizontal, 0);
+            if(horizontal == 0)
+            {
+                rb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX 
+                    | RigidbodyConstraints.FreezeRotationZ;
+            }
+            else
+            {
+                transform.Rotate(0, horizontal, 0);
+                rb.constraints = RigidbodyConstraints.FreezeRotationX
+                    | RigidbodyConstraints.FreezeRotationZ;
+            }
+           
 
             ControlToWorld(this.transform, playerCam.transform, ref direction, ref speed);
 
@@ -113,7 +128,16 @@ public class PlayerController : MonoBehaviour {
             //animator.SetFloat("Direction", direction, dampDirectionTime, Time.deltaTime);
         }
 
-        if(health <= 0)
+        if(spotted == true)
+        {
+            spottedTimer -= 0.1f;
+            if(spottedTimer <= 0)
+            {
+                caught = true;
+            }
+        }
+
+        if (health <= 0 || caught == true)
         {
             dead = true;
             fadeDelay -= 0.1f;
@@ -122,7 +146,11 @@ public class PlayerController : MonoBehaviour {
             //   this.transform.rotation = playerStart.rotation;
             //   health = 3;
 
-            electricTimer -= 0.1f;
+        electricTimer -= 0.1f;
+        if(spotted == false)
+        {
+            coolDownTimer -= 0.1f;
+        }
     }
 
     private void FixedUpdate()
@@ -160,6 +188,15 @@ public class PlayerController : MonoBehaviour {
             keysHeld += 1;
             Destroy(other.gameObject);
         }
+        if(other.gameObject.CompareTag("PlayerDetector"))
+        {
+            spotted = true;
+            if(coolDownTimer <= 0)
+            {
+                spottedTimer = 10.0f;
+            }
+            
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -167,6 +204,11 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.CompareTag("Doorway"))
         {
             insideDoorArea = false;
+        }
+        if (other.gameObject.CompareTag("PlayerDetector"))
+        {
+            coolDownTimer = 10.0f;
+            spotted = false;
         }
     }
 
