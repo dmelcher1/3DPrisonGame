@@ -22,7 +22,7 @@ public class DoorController : MonoBehaviour {
 	void Update ()
     {
         timer -= 0.1f;
-        if (opened == true)
+        if (opened == true || timer > 0)
         {
             var target = Quaternion.Euler(0, doorAngleOpen, 0);
             transform.localRotation = Quaternion.Slerp(transform.localRotation, target, smooth * Time.deltaTime);
@@ -51,6 +51,7 @@ public class DoorController : MonoBehaviour {
                 pController.keysHeld -= 1;
                 this.gameObject.tag = "Unlocked";
                 opened = true;
+                timer = 20.0f;
                 //this.gameObject.GetComponent<MeshRenderer>().material = unlockMat;
             }
         }
@@ -59,6 +60,7 @@ public class DoorController : MonoBehaviour {
             if (other.tag == "Player" && Input.GetButton("Interact") && inContact == true)
             {
                 opened = true;
+                timer = 20.0f;
             }
         }
     }
@@ -69,7 +71,6 @@ public class DoorController : MonoBehaviour {
         {
             inContact = false;
             opened = false;
-            timer = 20.0f;
         }
     }
 }

@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float electricTimer = 0.0f;
 
+
+    public bool zapped = false;
     public int health;
     public Transform playerStart;
     private float speed = 0.0f;
@@ -30,7 +32,7 @@ public class PlayerController : MonoBehaviour {
     public bool insideDoorArea = false;
     public bool airborne = false;
 
-    public float fadeDelay = 6.0f;
+    public float fadeDelay = 10.0f;
     public bool dead = false;
     private float playerRot = 80.0f;
     private float playerRun = 4.0f;
@@ -71,6 +73,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(rb.velocity);
         if (insideDoorArea == true)
         {
             playerCamControl.offsetX = 1.0f;
@@ -84,7 +87,7 @@ public class PlayerController : MonoBehaviour {
             playerCamControl.offsetY = 2.0f;
         }
 
-        if (animator)
+        if (animator && zapped == false && caught == false)
         {
             stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             controlInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -128,13 +131,10 @@ public class PlayerController : MonoBehaviour {
             //animator.SetFloat("Direction", direction, dampDirectionTime, Time.deltaTime);
         }
 
-        if(spotted == true)
+        if(electricTimer <= 10.0f)
         {
-            spottedTimer -= 0.1f;
-            if(spottedTimer <= 0)
-            {
-                caught = true;
-            }
+            zapped = false;
+            animator.SetBool("Zapped", false);
         }
 
         if (health <= 0 || caught == true)
@@ -150,6 +150,15 @@ public class PlayerController : MonoBehaviour {
         if(spotted == false)
         {
             coolDownTimer -= 0.1f;
+        }
+        if (spotted == true)
+        {
+            spottedTimer -= 0.1f;
+            if (spottedTimer <= 0)
+            {
+                caught = true;
+                animator.SetBool("Caught", true);
+            }
         }
     }
 
@@ -172,6 +181,9 @@ public class PlayerController : MonoBehaviour {
         }
         if (collision.gameObject.tag == "ElectricFence" && electricTimer <= 0.0f)
         {
+            zapped = true;
+            //StartCoroutine("BounceForce");
+            animator.SetBool("Zapped", true);
             health -= 1;
             electricTimer = 20.0f;
         }
@@ -241,6 +253,13 @@ public class PlayerController : MonoBehaviour {
 
         directionOut = angleplayerTransToMove * directionSpeed;
     }
+
+    //private IEnumerator BounceForce()
+    //{
+    //    rb.velocity = -rb.velocity;
+    //    yield return new WaitForSeconds(3);
+    //    rb.velocity = new Vector3(0, 0, 0);
+    //}
 
     public bool IsInLocomotion()
     {

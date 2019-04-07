@@ -7,19 +7,21 @@ public class LevelShift : MonoBehaviour {
     public Animator animator;
     public PlayerController playerController;
     public GameObject player;
+    public GameController gameController;
+    private Animator playerAnimator;
     
 
     private void Start()
     {
         playerController = GameObject.FindObjectOfType<PlayerController>();
-       
-
+        gameController = GameObject.FindObjectOfType<GameController>();
+        playerAnimator = player.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update ()
     {
-		if(playerController.dead == true && playerController.fadeDelay <= 0.0f)
+		if((playerController.dead == true && playerController.fadeDelay <= 0.0f) || gameController.winnaCountDown <= 5.0f)
         {
             FadeOnDeath();
         }
@@ -38,7 +40,8 @@ public class LevelShift : MonoBehaviour {
         playerController.spottedTimer = 10.0f;
         playerController.dead = false;
         playerController.caught = false;
-        playerController.fadeDelay = 6.0f;
+        playerAnimator.SetBool("Caught", false);
+        playerController.fadeDelay = 10.0f;
         animator.SetBool("FadeOut", false);
     }
 }
