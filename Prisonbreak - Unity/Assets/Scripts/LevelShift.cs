@@ -13,8 +13,8 @@ public class LevelShift : MonoBehaviour {
 
     private void Start()
     {
-        playerController = GameObject.FindObjectOfType<PlayerController>();
-        gameController = GameObject.FindObjectOfType<GameController>();
+        //playerController = GameObject.FindObjectOfType<PlayerController>();
+        //gameController = GameObject.FindObjectOfType<GameController>();
         playerAnimator = player.GetComponent<Animator>();
     }
 
