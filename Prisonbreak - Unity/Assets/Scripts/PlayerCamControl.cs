@@ -125,6 +125,31 @@ public class PlayerCamControl : MonoBehaviour {
         {
             Debug.DrawRay(objDetect.point, Vector3.left, Color.red);
             toPlayer = new Vector3(objDetect.point.x, toPlayer.y, objDetect.point.z);
+            Debug.Log(objDetect.point);
         }
+        //if (Physics.Linecast(fromCollision, toPlayer, out objDetect) && objDetect.point.x < 35.0f && objDetect.point.z < 60.0f)
+        //{
+        //    Debug.DrawRay(objDetect.point, Vector3.left, Color.red);
+        //    toPlayer = new Vector3(objDetect.point.x + 0.75f, toPlayer.y - 0.25f, objDetect.point.z + 0.75f);
+        //    Debug.Log(objDetect.point);
+        //}
+        //else if (Physics.Linecast(fromCollision, toPlayer, out objDetect) && objDetect.point.x > 35.0f && objDetect.point.z < 60.0f)
+        //{
+        //    Debug.DrawRay(objDetect.point, Vector3.left, Color.red);
+        //    toPlayer = new Vector3(objDetect.point.x - 0.75f, toPlayer.y - 0.25f, objDetect.point.z + 0.75f);
+        //    Debug.Log(objDetect.point);
+        //}
+        //else if (Physics.Linecast(fromCollision, toPlayer, out objDetect) && objDetect.point.x < 35.0f && objDetect.point.z > 60.0f)
+        //{
+        //    Debug.DrawRay(objDetect.point, Vector3.left, Color.red);
+        //    toPlayer = new Vector3(objDetect.point.x + 0.75f, toPlayer.y - 0.25f, objDetect.point.z - 0.75f);
+        //    Debug.Log(objDetect.point);
+        //}
+        //else if (Physics.Linecast(fromCollision, toPlayer, out objDetect) && objDetect.point.x > 35.0f && objDetect.point.z > 60.0f)
+        //{
+        //    Debug.DrawRay(objDetect.point, Vector3.left, Color.red);
+        //    toPlayer = new Vector3(objDetect.point.x - 0.75f, toPlayer.y - 0.25f, objDetect.point.z - 0.75f);
+        //    Debug.Log(objDetect.point);
+        //}
     }
 }
