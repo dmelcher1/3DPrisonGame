@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Doorway"))
         {
@@ -232,6 +232,8 @@ public class PlayerController : MonoBehaviour {
             spotted = true;
         }
     }
+   
+
 
     private void OnTriggerExit(Collider other)
     {
