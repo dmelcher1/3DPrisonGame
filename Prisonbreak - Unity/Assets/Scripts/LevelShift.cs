@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class LevelShift : MonoBehaviour {
@@ -9,6 +10,7 @@ public class LevelShift : MonoBehaviour {
     public GameObject player;
     public GameController gameController;
     private Animator playerAnimator;
+    public Slider healthSlider;
     
 
     private void Start()
@@ -37,6 +39,7 @@ public class LevelShift : MonoBehaviour {
         player.transform.position = playerController.playerStart.position;
         player.transform.rotation = playerController.playerStart.rotation;
         playerController.health = 3;
+        healthSlider.value = playerController.health;
         playerController.spottedTimer = 10.0f;
         playerController.dead = false;
         playerController.caught = false;

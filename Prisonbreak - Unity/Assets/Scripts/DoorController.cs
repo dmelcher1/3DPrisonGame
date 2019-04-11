@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class DoorController : MonoBehaviour {
@@ -11,6 +12,7 @@ public class DoorController : MonoBehaviour {
     public bool opened = false;
     public bool inContact = false;
     private PlayerController pController;
+    public Text keyText;
 
 	// Use this for initialization
 	void Start ()
@@ -49,6 +51,7 @@ public class DoorController : MonoBehaviour {
             if (other.tag == "Player" && Input.GetButton("Interact") && inContact == true)
             {
                 pController.keysHeld -= 1;
+                keyText.text = "Keys: " + pController.keysHeld.ToString();
                 this.gameObject.tag = "Unlocked";
                 opened = true;
                 timer = 20.0f;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -17,6 +18,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float electricTimer = 0.0f;
     public GameObject spotLight;
+
+    public Slider healthSlider;
+    public Text keyText;
 
     public float jumpTimer;
     public bool zapped = false;
@@ -144,10 +148,11 @@ public class PlayerController : MonoBehaviour {
             dead = true;
             fadeDelay -= 0.1f;
         }
-            //   this.transform.position = playerStart.position;
-            //   this.transform.rotation = playerStart.rotation;
-            //   health = 3;
+        //   this.transform.position = playerStart.position;
+        //   this.transform.rotation = playerStart.rotation;
+        //   health = 3;
 
+        
         electricTimer -= 0.1f;
         jumpTimer -= 0.1f;
         if(electricTimer > 0 && dead == true)
@@ -209,7 +214,8 @@ public class PlayerController : MonoBehaviour {
             //StartCoroutine("BounceForce");
             animator.SetBool("Zapped", true);
             health -= 1;
-            if(dead == false)
+            healthSlider.value = health;
+            if (dead == false)
             {
                 electricTimer = 20.0f;
             }
@@ -225,6 +231,7 @@ public class PlayerController : MonoBehaviour {
         if(other.gameObject.CompareTag("Key"))
         {
             keysHeld += 1;
+            keyText.text = "Keys: " + keysHeld.ToString();
             Destroy(other.gameObject);
         }
         if(other.gameObject.CompareTag("PlayerDetector"))
